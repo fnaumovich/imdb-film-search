@@ -18,7 +18,9 @@
 
 <style lang="scss">
     #app {
-        padding-top: 60px;
+        min-height: 100vh;
+        padding-top: 20px;
+        background: #f6f6f6;
     }
 
     .container {

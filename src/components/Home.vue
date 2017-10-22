@@ -7,9 +7,8 @@
                     class="form__input"
                     placeholder="Введите название фильма"
                     v-model="filmName"
-                    @keyup.prevent.enter="fetchMovies()"
                 >
-                <button type="submit" class="form__search-btn" @click.prevent="fetchMovies()">Поиск</button>
+                <button type="submit" class="form__search-btn" @click.prevent="loadMovies">Поиск</button>
             </div>
         </div>
         <section class="films-wrapper">
@@ -19,7 +18,7 @@
 </template>
 
 <script>
-    import { mapActions, mapState, mapGetters } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
     import oFilms from './Films.vue';
 
     export default {
@@ -33,15 +32,14 @@
             ...mapGetters(['getMovies'])
         },
         methods: {
-            fetchMovies() {
-                const search = this.filmName;
-                this.$store.dispatch('fetchMovies', { search });
-            }
+            loadMovies() {
+                this.fetchMovies({ search: this.filmName })
+            },
+
+            ...mapActions(['fetchMovies'])
         },
         components: {
             oFilms
-        },
-        created() {
         }
     }
 </script>
@@ -56,11 +54,11 @@
         }
 
         &__input {
-            flex: 1;
+            flex: 1 0 auto;
         }
 
         &__search-btn {
-            flex: 0;
+            flex: 0 0 auto;
         }
     }
 

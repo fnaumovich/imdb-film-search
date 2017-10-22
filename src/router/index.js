@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-// import Films from '@/components/Films';
+import Film from '@/components/Film';
 import Home from '@/components/Home.vue';
 
 export default new Router({
@@ -12,6 +12,11 @@ export default new Router({
             path: '/',
             name: 'Home',
             component: Home
+        },
+        {
+            path: '/film/:id',
+            name: 'Film',
+            component: Film
         }
     ]
 });
