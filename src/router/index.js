@@ -3,8 +3,8 @@ import Router from 'vue-router';
 
 Vue.use(Router);
 
-import Film from '@/components/Film';
-import Home from '@/components/Home.vue';
+import cFilm from '@/pages/movies/cMovie';
+import Home from '@/pages/movies/index.vue';
 
 export default new Router({
     routes: [
@@ -16,7 +16,7 @@ export default new Router({
         {
             path: '/film/:id',
             name: 'Film',
-            component: Film
+            component: cFilm
         }
     ]
 });

@@ -2,24 +2,26 @@
     <section class="movie">
         <div class="movie__wrapper">
             <div class="movie__img-wrapper">
-                <img v-bind="{ src: movie.Poster }">
+                <img v-bind="{ src: movie.Poster, title: movie.Title }">
             </div>
             <h2 class="movie__title">{{ movie.Title }}</h2>
             <div class="movie__year"><b>Year:</b> {{ movie.Year }}</div>
-            <div class="movie__year"><b>Released:</b> {{ movie.Released }}</div>
-            <div class="movie__year"><b>Country:</b> {{ movie.Counry }}</div>
-            <div class="movie__year"><b>Rating:</b> {{ movie.Rating }}</div>
-            <div class="movie__year"><b>Box Office:</b> {{ movie.BoxOffice }}</div>
-            <div class="movie__year"><a target="_blank" v-bind="{ href: movie.Website }">website</a></div>
+            <div class="movie__released"><b>Released:</b> {{ movie.Released }}</div>
+            <div class="movie__country"><b>Country:</b> {{ movie.Country }}</div>
+            <div class="movie__rating"><b>Rating:</b> {{ movie.imdbRating }}</div>
+            <div class="movie__box-office"><b>Box Office:</b> {{ movie.BoxOffice }}</div>
+            <div class="movie__website">
+                <a target="_blank" v-bind="{ href: movie.Website }">website</a>
+            </div>
         </div>
     </section>
 </template>
 
 <script>
-    import { mapActions, mapGetters, mapState } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
 
     export default {
-        name: 'film-itself',
+        name: 'movie-itself',
         computed: {
             movieId() {
                 return this.$route.params.id;

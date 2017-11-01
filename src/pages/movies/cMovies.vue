@@ -2,22 +2,24 @@
     <section class="film-item">
         <div class="film-item__wrapper">
             <div class="film-item__img-wrapper">
-                <router-link :to="{name: 'Film', params: {id: film.imdbID}}">
-                    <img v-bind="{ src: film.Poster, alt: film.Title }">
+                <router-link :to="{ name: 'Film', params: { id: movie.imdbID } }">
+                    <img v-bind="{ src: movie.Poster, alt: movie.Title }">
                 </router-link>
             </div>
-            <div class="film-item__title"><router-link :to="{name: 'Film', params: {id: film.imdbID}}">{{ film.Title }}</router-link></div>
-            <div class="film-item__year">{{ film.Year }}</div>
-            <div class="film-item__id">{{ film.imdbID }}</div>
+            <div class="film-item__title">
+                <router-link :to="{ name: 'Film', params: { id: movie.imdbID } }">{{ movie.Title }}</router-link>
+            </div>
+            <div class="film-item__year">{{ movie.Year }}</div>
+            <div class="film-item__id">{{ movie.imdbID }}</div>
         </div>
     </section>
 </template>
 
 <script>
     export default {
-        name: 'film',
+        name: 'movie',
         props: {
-            film: {
+            movie: {
                 type: Object,
                 default: () => {}
             }
@@ -33,8 +35,7 @@
         padding: 10px;
 
         &__wrapper {
-            margin-bottom: 20px;
-            padding: 10px;
+            padding: 20px;
             background-color: #fff;
             border-radius: 8px;
         }

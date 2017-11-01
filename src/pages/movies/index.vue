@@ -13,7 +13,7 @@
             </div>
         </div>
         <section v-if="movies.length" class="films-wrapper">
-            <o-films  :key="film.imdbID" v-for="film in movies" v-bind="{ film }"></o-films>
+            <c-movies  :key="movie.imdbID" v-for="movie in movies" v-bind="{ movie }"></c-movies>
         </section>
         <h2 class="not-found" v-else-if="initialized">Фильмы не найдены</h2>
     </section>
@@ -21,7 +21,7 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import oFilms from './Films.vue';
+    import cMovies from './cMovies.vue';
 
     export default {
         name: 'main-app',
@@ -41,7 +41,7 @@
             ...mapActions('movies', ['fetchMovies'])
         },
         components: {
-            oFilms
+            cMovies
         }
     }
 </script>
