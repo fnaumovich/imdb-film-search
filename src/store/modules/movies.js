@@ -40,7 +40,7 @@ export default {
         fetchMovie({ commit }, search) {
             axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&i=${search}`)
                 .then(data => {
-                    const movie = data.data;
+                    const movie = get(data, 'data', {});
                     commit(types.FETCH_MOVIE, movie)
                 })
                 .catch(err => console.log(err))
