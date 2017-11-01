@@ -2,21 +2,21 @@
     <section class="movie">
         <div class="movie__wrapper">
             <div class="movie__img-wrapper">
-                <img v-bind="{ src: movie.poster }">
+                <img v-bind="{ src: movie.Poster }">
             </div>
-            <h2 class="movie__title">{{ movie.title }}</h2>
-            <div class="movie__year"><b>Year:</b> {{ movie.year }}</div>
-            <div class="movie__year"><b>Released:</b> {{ movie.released }}</div>
-            <div class="movie__year"><b>Country:</b> {{ movie.counry }}</div>
-            <div class="movie__year"><b>Rating:</b> {{ movie.rating }}</div>
-            <div class="movie__year"><b>Box Office:</b> {{ movie.boxOffice }}</div>
-            <div class="movie__year"><a target="_blank" v-bind="{ href: movie.website }">website</a></div>
+            <h2 class="movie__title">{{ movie.Title }}</h2>
+            <div class="movie__year"><b>Year:</b> {{ movie.Year }}</div>
+            <div class="movie__year"><b>Released:</b> {{ movie.Released }}</div>
+            <div class="movie__year"><b>Country:</b> {{ movie.Counry }}</div>
+            <div class="movie__year"><b>Rating:</b> {{ movie.Rating }}</div>
+            <div class="movie__year"><b>Box Office:</b> {{ movie.BoxOffice }}</div>
+            <div class="movie__year"><a target="_blank" v-bind="{ href: movie.Website }">website</a></div>
         </div>
     </section>
 </template>
 
 <script>
-    import { mapActions, mapGetters } from 'vuex';
+    import { mapActions, mapGetters, mapState } from 'vuex';
 
     export default {
         name: 'film-itself',
@@ -24,27 +24,15 @@
             movieId() {
                 return this.$route.params.id;
             },
-            movie() {
-                return {
-                    title: this.getMovie.Title,
-                    poster: this.getMovie.Poster,
-                    boxOffice: this.getMovie.BoxOffice,
-                    counry: this.getMovie.Country,
-                    rating: this.getMovie.imdbRating,
-                    released: this.getMovie.Released,
-                    year: this.getMovie.Year,
-                    website: this.getMovie.Website,
-                }
-            },
 
-            ...mapGetters(['getMovie'])
+            ...mapState('movies', ['movie']),
         },
         methods: {
             loadMovie() {
-                this.fetchMovie({ search: this.movieId });
+                this.fetchMovie(this.movieId);
             },
 
-            ...mapActions(['fetchMovie'])
+            ...mapActions('movies', ['fetchMovie'])
         },
         created() {
             this.loadMovie();

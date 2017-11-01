@@ -2,7 +2,9 @@
     <section class="film-item">
         <div class="film-item__wrapper">
             <div class="film-item__img-wrapper">
-                <img v-bind="{ src: film.Poster, alt: film.Title }">
+                <router-link :to="{name: 'Film', params: {id: film.imdbID}}">
+                    <img v-bind="{ src: film.Poster, alt: film.Title }">
+                </router-link>
             </div>
             <div class="film-item__title"><router-link :to="{name: 'Film', params: {id: film.imdbID}}">{{ film.Title }}</router-link></div>
             <div class="film-item__year">{{ film.Year }}</div>

@@ -7,18 +7,20 @@
                     class="form__input"
                     placeholder="Введите название фильма"
                     v-model="filmName"
+                    @keyup.enter="loadMovies"
                 >
                 <button type="submit" class="form__search-btn" @click.prevent="loadMovies">Поиск</button>
             </div>
         </div>
-        <section class="films-wrapper">
-            <o-films :key="film.imdbID" v-for="film in getMovies" v-bind="{ film }"></o-films>
+        <section v-if="movies.length" class="films-wrapper">
+            <o-films  :key="film.imdbID" v-for="film in movies" v-bind="{ film }"></o-films>
         </section>
+        <h2 class="not-found" v-else-if="initialized">Фильмы не найдены</h2>
     </section>
 </template>
 
 <script>
-    import { mapActions, mapGetters } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import oFilms from './Films.vue';
 
     export default {
@@ -29,14 +31,14 @@
             }
         },
         computed: {
-            ...mapGetters(['getMovies'])
+            ...mapState('movies', ['movies', 'initialized'])
         },
         methods: {
             loadMovies() {
-                this.fetchMovies({ search: this.filmName })
+                this.fetchMovies(this.filmName);
             },
 
-            ...mapActions(['fetchMovies'])
+            ...mapActions('movies', ['fetchMovies'])
         },
         components: {
             oFilms
@@ -66,5 +68,9 @@
         display: flex;
         flex-flow: row wrap;
         justify-content: space-between;
+    }
+
+    .not-found {
+        text-align: center;
     }
 </style>

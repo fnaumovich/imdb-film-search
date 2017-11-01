@@ -2,7 +2,9 @@
     <section id="app">
         <div class="container">
             <section class="logo-wrapper">
-                <img src="./assets/logo.png">
+                <router-link to="/">
+                    <img src="./assets/logo.png">
+                </router-link>
             </section>
 
             <router-view></router-view>
