@@ -1,17 +1,15 @@
 <template>
     <section class="film-item">
-        <div class="film-item__wrapper">
-            <div class="film-item__img-wrapper">
-                <router-link :to="{ name: 'Film', params: { id: movie.imdbID } }">
+        <router-link class="film-item__link" :to="{ name: 'Film', params: { id: movie.imdbID } }">
+            <div class="film-item__wrapper">
+                <div class="film-item__img-wrapper">
                     <img v-bind="{ src: movie.Poster, alt: movie.Title }">
-                </router-link>
+                </div>
+                <div class="film-item__title">{{ movie.Title }}</div>
+                <div class="film-item__year">{{ movie.Year }}</div>
+                <div class="film-item__id">{{ movie.imdbID }}</div>
             </div>
-            <div class="film-item__title">
-                <router-link :to="{ name: 'Film', params: { id: movie.imdbID } }">{{ movie.Title }}</router-link>
-            </div>
-            <div class="film-item__year">{{ movie.Year }}</div>
-            <div class="film-item__id">{{ movie.imdbID }}</div>
-        </div>
+        </router-link>
     </section>
 </template>
 
@@ -33,6 +31,19 @@
     .film-item {
         width: 33.3%;
         padding: 10px;
+        color: #000;
+
+        &__link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            color: currentColor;
+
+            &:hover {
+                color: currentColor;
+                text-decoration: none;
+            }
+        }
 
         &__wrapper {
             padding: 20px;
@@ -69,6 +80,8 @@
         &:hover {
             .#{$block-name}__wrapper {
                 box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.2);
+                transform: scale(1.02);
+                transition: all 0.3s ease-in-out;
             }
         }
     }

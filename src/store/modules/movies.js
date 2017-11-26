@@ -6,11 +6,13 @@ const apiKey = 'e5dc19b4';
 
 export default {
     namespaced: true,
-    state: {
-        movies: [],
-        movie: {},
-        initialized: false
-    },
+    state(){
+        return {
+            movies: [],
+            movie: {},
+            initialized: false
+        }
+    } ,
     getters: {
         getMovies(state) {
             return state.movies;
