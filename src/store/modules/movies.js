@@ -1,8 +1,5 @@
 import * as types from '../mutation-types';
-import axios from 'axios';
-import get from 'lodash.get';
-
-const apiKey = 'e5dc19b4';
+import apiService from '@/api/apiService';
 
 export default {
     namespaced: true,
@@ -31,21 +28,13 @@ export default {
         }
     },
     actions: {
-        fetchMovies({ commit }, search) {
-            axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&s=${search}`)
-                .then(data => {
-                    const moviesList = get(data, 'data.Search', []);
-                    commit(types.FETCH_MOVIES, moviesList);
-                })
-                .catch(err => console.log(err))
+        async fetchMovies(store, search) {
+            const moviesList = await apiService.getMovies(search);
+            store.commit(types.FETCH_MOVIES, moviesList);
         },
-        fetchMovie({ commit }, search) {
-            axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&i=${search}`)
-                .then(data => {
-                    const movie = get(data, 'data', {});
-                    commit(types.FETCH_MOVIE, movie)
-                })
-                .catch(err => console.log(err))
+        async fetchMovie(store, search) {
+            const movie = await apiService.getMovie(search);
+            store.commit(types.FETCH_MOVIE, movie);
         }
     }
-}
+};
